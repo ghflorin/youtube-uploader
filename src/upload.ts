@@ -1130,7 +1130,9 @@ async function changeHomePageLangIfNeeded(localPage: Page) {
 }
 
 async function launchBrowser(puppeteerLaunch?: PuppeteerNodeLaunchOptions, loadCookies: boolean = true) {
-    browser = await puppeteer.launch(puppeteerLaunch)
+    browser = await puppeteer.launch(puppeteerLaunch)({
+      args: ['--no-sandbox', '--disable-setuid-sandbox'],
+    });
     page = await browser.newPage()
     await page.setDefaultTimeout(timeout)
 
